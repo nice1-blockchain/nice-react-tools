@@ -1,5 +1,4 @@
 import Decimal from 'decimal.js'
-// import { useEffect, useState } from 'react'
 import { useAnchor } from '../hooks/anchor'
 
 const Profile = () => {
