@@ -37,7 +37,8 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
     alias: null,
   })
   const { session } = useAnchor()
-  const [ initBalance, setInitBalance ] = useState<boolean>(false)
+  const [ balanceInit, setBalanceInit ] = useState<boolean>(false)
+  const [ profileInit, setProfileInit ] = useState<boolean>(false)
 
   const getNiceBalance = async (session: LinkSession) : Promise<Asset> => {
     let balance : Asset
@@ -61,20 +62,22 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
   // get nice1 balance
   useEffect(() => {
     ;(async () => {
-      if (initBalance || session === null) return
+      if (balanceInit || session === null) return
 
       const bal = await getNiceBalance(session)
 
       setBalance(bal)
-      setInitBalance(true)
+      setBalanceInit(true)
     })()
 
-  }, [session, initBalance])
+  }, [session, balanceInit])
 
   // get profile
   useEffect(() => {
     ;(async () => {
-      if (typeof profile.alias === 'string' || typeof profile.avatar === 'string' || session === null) return
+      if (session === null || profileInit) {
+        return
+      }
 
       const {rows} = await session.client.v1.chain.get_table_rows({
         json: true,
@@ -94,6 +97,7 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
       }
 
       setProfile(prof)
+      setProfileInit(true)
     })()
 
   }, [session])
