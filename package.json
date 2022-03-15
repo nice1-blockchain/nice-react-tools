@@ -1,6 +1,6 @@
 {
-  "name": "@nice1/l1nk",
-  "version": "0.0.0",
+  "name": "@nice1/react-tools",
+  "version": "0.0.1",
   "main": "dist/index.js",
   "module": "dist/index.js",
   "files": [
