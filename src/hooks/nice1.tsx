@@ -30,12 +30,16 @@ export const useNice1 = () => {
   return cntxt
 }
 
+const baseProfile : Profile = {
+  avatar: null,
+  alias: null,
+}
+
+const zeroBalance = Asset.fromString('0 NICEONE')
+
 export const Nice1Provider = ({children} : {children: ReactNode}) => {
-  const [ balance, setBalance ] = useState<Asset>(Asset.fromString('0 NICEONE'))
-  const [ profile, setProfile ] = useState<Profile>({
-    avatar: null,
-    alias: null,
-  })
+  const [ balance, setBalance ] = useState<Asset>(zeroBalance)
+  const [ profile, setProfile ] = useState<Profile>(baseProfile)
   const { session } = useAnchor()
   const [ balanceInit, setBalanceInit ] = useState<boolean>(false)
   const [ profileInit, setProfileInit ] = useState<boolean>(false)
@@ -53,7 +57,7 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
     }
 
     if (balance === undefined) {
-      balance = Asset.fromString('0 NICEONE')
+      balance = zeroBalance
     }
 
     return balance
@@ -101,6 +105,16 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
     })()
 
   }, [session])
+
+  // logout
+  useEffect(() => {
+    if (profileInit && balanceInit && session === null) {
+      setProfile(baseProfile)
+      setBalance(zeroBalance)
+      setProfileInit(false)
+      setBalanceInit(false)
+    }
+  }, [session, profileInit])
 
   return (
     <Nice1Context.Provider value={{balance, profile}}>
