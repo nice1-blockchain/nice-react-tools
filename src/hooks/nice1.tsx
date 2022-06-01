@@ -166,6 +166,7 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
         code: 'n1ceprofiles',
         scope: 'n1ceprofiles',
         lower_bound: session.auth.actor,
+        upper_bound: session.auth.actor,
         table: 'profiles',
         limit: 1,
         reverse: false,
