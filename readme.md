@@ -3,6 +3,15 @@ Nice1 react tools
 
 React helper tools for using both nice1 and anchor wallet in your applications.
 
+Installation
+------------
+
+~~~bash
+yarn add @nice1/react-tools
+# or
+npm i @nice1/react-tools
+~~~
+
 Hooks
 -----
 
@@ -13,6 +22,8 @@ These hooks can help you in the different parts of your app:
 With `useAnchor` you can easily login, logout, make blockchain calls and whatnot, with your anchor wallet:
 
 ~~~tsx
+import { useAnchor } from '@nice1/react-tools'
+
 const MyCoolComponent = () => {
   const { login, logout, session } = useAnchor()
 
@@ -34,6 +45,8 @@ const MyCoolComponent = () => {
 After you logged in using `useAnchor`, you can access and update nice1 info like your balance or profile information from our contracts:
 
 ~~~tsx
+import { useAnchor, useNice1 } from '@nice1/react-tools'
+
 const MyCoolComponent = () => {
   const { login, logout, session } = useAnchor()
   const { profile, balance } = useNice1()
