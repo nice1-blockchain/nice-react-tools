@@ -3,8 +3,13 @@ import { createContext, ReactNode, useContext, useEffect, useState } from 'react
 import { useAnchor } from './anchor'
 
 export interface Profile {
-  avatar: string | null
-  alias: string | null
+  avatar?: string
+  alias?: string
+}
+
+const baseProfile : Profile = {
+  avatar: '',
+  alias: '',
 }
 
 export interface Nice1 {
@@ -17,10 +22,7 @@ export interface Nice1 {
 
 export const Nice1Context = createContext<Nice1>({
   balance: Asset.fromString('0 NICEONE'),
-  profile: {
-    avatar: null,
-    alias: null,
-  },
+  profile: baseProfile,
   updateProfile: () => Promise.resolve({} as TransactResult),
   setAlias: () => Promise.resolve({} as TransactResult),
   setAvatar: () => Promise.resolve({} as TransactResult),
@@ -36,9 +38,15 @@ export const useNice1 = () => {
   return cntxt
 }
 
-const baseProfile : Profile = {
-  avatar: null,
-  alias: null,
+const cleanProfile = (profile: Profile) => {
+  if (!profile.alias) {
+    profile.alias = ''
+  }
+  if (!profile.avatar) {
+    profile.avatar = ''
+  }
+
+  return profile
 }
 
 const zeroBalance = Asset.fromString('0 NICEONE')
@@ -80,7 +88,7 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
       authorization: [session.auth],
       data: {
         user: session.auth.actor,
-        ...profile,
+        ...cleanProfile(profile),
       } as any,
     }
 
@@ -92,53 +100,11 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
   }
 
   const setAlias = async (alias: string) => {
-    if (session === null) {
-      throw new Error('Session not properly initialized')
-    }
-
-    const action = {
-      account: 'n1ceprofiles',
-      name: 'setalias',
-      authorization: [session.auth],
-      data: {
-        user: session.auth.actor,
-        alias,
-      }
-    }
-
-    return session.transact({action}).then((result) => {
-      setProfile({
-        alias,
-        avatar: profile.avatar,
-      })
-
-      return result
-    })
+    return updateProfile({alias})
   }
 
   const setAvatar = async (avatar: string) => {
-    if (session === null) {
-      throw new Error('Session not properly initialized')
-    }
-
-    const action = {
-      account: 'n1ceprofiles',
-      name: 'setavatar',
-      authorization: [session.auth],
-      data: {
-        user: session.auth.actor,
-        avatar,
-      }
-    }
-
-    return session.transact({action}).then((result) => {
-      setProfile({
-        avatar,
-        alias: profile.alias,
-      })
-
-      return result
-    })
+    return updateProfile({avatar})
   }
 
   // get nice1 balance
@@ -164,7 +130,7 @@ export const Nice1Provider = ({children} : {children: ReactNode}) => {
       const {rows} = await session.client.v1.chain.get_table_rows({
         json: true,
         code: 'n1ceprofiles',
-        scope: 'n1ceprofiles',
+        scope: '0',
         lower_bound: session.auth.actor,
         upper_bound: session.auth.actor,
         table: 'profiles',

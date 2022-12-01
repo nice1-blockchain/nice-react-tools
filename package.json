@@ -11,26 +11,28 @@
   "license": "GPL3.0",
   "private": false,
   "scripts": {
-    "build": "tsc"
+    "build": "tsc",
+    "link:react": "rm -fr node_modules/react && ln -s ../../nice1-link/node_modules/react node_modules",
+    "postinstall": "yarn link:react"
   },
   "dependencies": {
     "@greymass/eosio": "^0.6.4",
-    "anchor-link": "^3.3.5",
-    "anchor-link-browser-transport": "^3.2.5",
-    "eosio-signing-request": "^2.3.1",
-    "react-scripts-ts": "^3.1.0",
-    "react-test-renderer": "^17.0.2",
-    "typescript": "^4.5.4"
+    "anchor-link": "^3.5.1",
+    "anchor-link-browser-transport": "^3.5.1",
+    "eosio-signing-request": "^2.5.2"
   },
   "peerDependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@types/react": "^18.0.6",
-    "@types/react-dom": "^17.0.11",
-    "@types/react-test-renderer": "^17.0.1",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "@types/react": "^18.0.24",
+    "@types/react-dom": "^18.0.8",
+    "@types/react-test-renderer": "^18.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts-ts": "^3.1.0",
+    "react-test-renderer": "^18.2.0",
+    "typescript": "^4.8.4"
   }
 }
