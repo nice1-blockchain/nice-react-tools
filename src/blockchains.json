@@ -1,20 +1,35 @@
 [
   {
-     "chainId": "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
-     "name": "EOS",
-     "rpcEndpoints": [{
-       "protocol": "https",
-       "host": "eos.greymass.com",
-       "port": 443
-     }]
+    "chainId": "aca376f206b8fc25a6ed44dbdc66547c36c6c33e3a119ffbeaef943642f0e906",
+    "name": "EOS",
+    "rpcEndpoints": [
+      {
+        "protocol": "https",
+        "host": "eos.greymass.com",
+        "port": 443
+      }
+    ]
   },
   {
     "chainId": "2a02a0053e5a8cf73a56ba0fda11e4d92e0238a4a2aa74fccf46d5a910746840",
-    "name": "Jungle 3 (Testnet)",
-    "rpcEndpoints": [{
-      "protocol": "https",
-      "host": "jungle3.cryptolions.io",
-      "port": 443
-    }]
+    "name": "Jungle 3 (Testnet EOS)",
+    "rpcEndpoints": [
+      {
+        "protocol": "https",
+        "host": "jungle3.cryptolions.io",
+        "port": 443
+      }
+    ]
+  },
+  {
+    "chainId": "73e4385a2708e6d7048834fbc1079f2fabb17b3c125b146af438971e90716c4d",
+    "name": "Jungle 4 (Testnet EOS)",
+    "rpcEndpoints": [
+      {
+        "protocol": "https",
+        "host": "jungle4.greymass.com",
+        "port": 443
+      }
+    ]
   }
 ]
