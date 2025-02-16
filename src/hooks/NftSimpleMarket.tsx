@@ -1,5 +1,5 @@
 import { createContext, ReactNode, useContext, useEffect, useState } from 'react'
-import { useAnchor } from from './anchor'
+import { useAnchor } from './anchor'
 
 export interface NftBaseSimpleMarket {
   id: number | null
