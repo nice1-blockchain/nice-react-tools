@@ -65,3 +65,115 @@ const MyCoolComponent = () => {
   )
 }
 ~~~
+
+
+---
+
+## **NFT Staking & Market Tools**  
+
+### **useNftAtomicAssets**  
+This hook retrieves and manages NFTs stored in **AtomicAssets**.
+
+```tsx
+import { useNftAtomicAssets } from '@nice1/react-tools'
+
+const MyComponent = () => {
+  const { nftsAA, updateNftsAA } = useNftAtomicAssets()
+
+  return (
+    <>
+      <h2>Your NFTs (AtomicAssets):</h2>
+      <ul>
+        {nftsAA.map((nft) => (
+          <li key={nft.asset_id}>
+            Collection: {nft.collection_name}, Template: {nft.template_id}
+          </li>
+        ))}
+      </ul>
+      <button onClick={updateNftsAA}>Refresh NFTs</button>
+    </>
+  )
+}
+```
+
+### **useNftAtomicMarket**  
+This hook retrieves **NFTs listed for sale** in **AtomicMarket**.
+
+```tsx
+import { useNftAtomicMarket } from '@nice1/react-tools'
+
+const MyComponent = () => {
+  const { nftsAM, updateNftsAM } = useNftAtomicMarket()
+
+  return (
+    <>
+      <h2>NFTs on AtomicMarket:</h2>
+      <ul>
+        {nftsAM.map((sale) => (
+          <li key={sale.sale_id}>
+            Seller: {sale.seller}, Price: {sale.listing_price}
+          </li>
+        ))}
+      </ul>
+      <button onClick={updateNftsAM}>Refresh Market</button>
+    </>
+  )
+}
+```
+
+### **useNftSimpleAssets**  
+This hook retrieves and manages NFTs stored in **SimpleAssets**.
+
+```tsx
+import { useNftSimpleAssets } from '@nice1/react-tools'
+
+const MyComponent = () => {
+  const { nftsSA, updateNfts } = useNftSimpleAssets()
+
+  return (
+    <>
+      <h2>Your NFTs (SimpleAssets):</h2>
+      <ul>
+        {nftsSA.map((nft) => (
+          <li key={nft.id}>
+            Owner: {nft.owner}, Category: {nft.category}
+          </li>
+        ))}
+      </ul>
+      <button onClick={updateNfts}>Refresh NFTs</button>
+    </>
+  )
+}
+```
+
+### **useNftSimpleMarket**  
+This hook retrieves **NFTs listed for sale** in **SimpleMarket**.
+
+```tsx
+import { useNftSimpleMarket } from '@nice1/react-tools'
+
+const MyComponent = () => {
+  const { nftsSM, updateNfts } = useNftSimpleMarket()
+
+  return (
+    <>
+      <h2>NFTs on SimpleMarket:</h2>
+      <ul>
+        {nftsSM.map((sale) => (
+          <li key={sale.id}>
+            Seller: {sale.owner}, Price: {sale.price}
+          </li>
+        ))}
+      </ul>
+      <button onClick={updateNfts}>Refresh Market</button>
+    </>
+  )
+}
+```
+
+---
+
+## **License**  
+This project is licensed under **Apache 2.0**.  
+
+---
